@@ -17,7 +17,27 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+Music platforms like Spotify predict what each user will enjoy by combining collaborative filtering (finding patterns across many users’ listening behavior, such as likes, skips, and shared playlists) with content-based filtering (comparing the attributes of songs: genre, energy, tempo, and mood,  to the songs a user already enjoys). My version focuses on a more simpliefied content-based approach --> it represents each user as a “taste profile” of preferred attributes, scores every song by how closely its attributes match the user's profile, then ranks the results to surface the best matches. It prioritizes transparency and explainability over pure scale (each recommendation can be traced back to a clear, weighted reason).
+
+Features Used:
+**Song object:**
+- genre
+- mood
+- energy
+- tempo_bpm
+- valence
+- danceability
+- acousticness
+
+**UserProfile object:**
+- preferred_genre
+- preferred_mood
+- preferred_energy
+- preferred_tempo_bpm
+- preferred_valence
+- preferred_danceabiliyt
+- preferred_acousticness
+
 
 Some prompts to answer:
 
