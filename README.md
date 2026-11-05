@@ -25,29 +25,13 @@ Features Used:
 - mood
 - energy
 - tempo_bpm
-- valence
-- danceability
-- acousticness
+
 
 **UserProfile object:**
 - preferred_genre
 - preferred_mood
 - preferred_energy
 - preferred_tempo_bpm
-- preferred_valence
-- preferred_danceabiliyt
-- preferred_acousticness
-
-
-Some prompts to answer:
-
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
-
-You can include a simple diagram or bullet list if helpful.
 
 ---
 
