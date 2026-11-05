@@ -33,6 +33,31 @@ Features Used:
 - preferred_energy
 - preferred_tempo_bpm
 
+
+### Algorithm Recipe
+
+My music recommender scores every song in the catalog against a fixed user taste profile and returns the top-ranked matches
+
+User taste profile:
+- favorite_genre: "rock"
+- favorite_mood: "energetic"
+- target_energy: 0.8
+
+Scoring rules (applied to each song):
+- +2.0 points if the song's genre matches favorite_genre
+- +1.0 point if the song's mood matches favorite_mood
+- Energy similarity: 1.0 maximum
+
+Ranking rule:
+- Sort all songs by total score (highest first) and return the Top K recommendations.
+
+Data flow:
+Input (user preferences) --> Process (loop over every song in songs.csv and apply the scoring rules) --> Output (rank by score, return Top K).
+
+### Potential Biases
+
+Because a genre match is worth twice a mood match, my  system may over-prioritize genre and overlook good songs that strongly match the user's mood but belong to a different genre. Also, it can create a "filter bubble," i.e., repeatedly favoring the user's known favorite genre and rarely surfacing new styles. A fixed single-profile design further ignores how taste changes with context (time of day, activity, etc.).
+
 ---
 
 ## Getting Started
