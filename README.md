@@ -123,6 +123,83 @@ Top recommendations for pop/happy listener:
      - Energy similarity (+0.95)
 '''
 
+
+## Sample Recommendation Output (stress test)
+'''
+Loaded songs: 18
+
+============================================================
+PROFILE: High-Energy Pop  (genre=pop, mood=happy, energy=0.9)
+============================================================
+1. Sunrise City — Neon Echo  [score: 3.92]
+     - Genre match: pop (+2.0)
+     - Mood match: happy (+1.0)
+     - Energy similarity (+0.92)
+2. Gym Hero — Max Pulse  [score: 2.97]
+     - Genre match: pop (+2.0)
+     - Energy similarity (+0.97)
+3. Rooftop Lights — Indigo Parade  [score: 1.86]
+     - Mood match: happy (+1.0)
+     - Energy similarity (+0.86)
+4. Storm Runner — Voltline  [score: 0.99]
+     - Energy similarity (+0.99)
+5. Iron Horizon — Black Meridian  [score: 0.94]
+     - Energy similarity (+0.94)
+
+============================================================
+PROFILE: Chill Lofi  (genre=lofi, mood=chill, energy=0.3)
+============================================================
+1. Library Rain — Paper Lanterns  [score: 3.95]
+     - Genre match: lofi (+2.0)
+     - Mood match: chill (+1.0)
+     - Energy similarity (+0.95)
+2. Midnight Coding — LoRoom  [score: 3.88]
+     - Genre match: lofi (+2.0)
+     - Mood match: chill (+1.0)
+     - Energy similarity (+0.88)
+3. Focus Flow — LoRoom  [score: 2.9]
+     - Genre match: lofi (+2.0)
+     - Energy similarity (+0.9)
+4. Spacewalk Thoughts — Orbit Bloom  [score: 1.98]
+     - Mood match: chill (+1.0)
+     - Energy similarity (+0.98)
+5. Autumn Letters — Willow Hart  [score: 0.99]
+     - Energy similarity (+0.99)
+
+============================================================
+PROFILE: Deep Intense Rock  (genre=rock, mood=intense, energy=0.9)
+============================================================
+1. Storm Runner — Voltline  [score: 3.99]
+     - Genre match: rock (+2.0)
+     - Mood match: intense (+1.0)
+     - Energy similarity (+0.99)
+2. Gym Hero — Max Pulse  [score: 1.97]
+     - Mood match: intense (+1.0)
+     - Energy similarity (+0.97)
+3. Iron Horizon — Black Meridian  [score: 0.94]
+     - Energy similarity (+0.94)
+4. Sunrise City — Neon Echo  [score: 0.92]
+     - Energy similarity (+0.92)
+5. Neon Mirage — Crystal Circuit  [score: 0.89]
+     - Energy similarity (+0.89)
+
+============================================================
+PROFILE: Contradiction  (genre=pop, mood=melancholic, energy=0.9)
+============================================================
+1. Gym Hero — Max Pulse  [score: 2.97]
+     - Genre match: pop (+2.0)
+     - Energy similarity (+0.97)
+2. Sunrise City — Neon Echo  [score: 2.92]
+     - Genre match: pop (+2.0)
+     - Energy similarity (+0.92)
+3. Autumn Letters — Willow Hart  [score: 1.41]
+     - Mood match: melancholic (+1.0)
+     - Energy similarity (+0.41)
+4. Storm Runner — Voltline  [score: 0.99]
+     - Energy similarity (+0.99)
+5. Iron Horizon — Black Meridian  [score: 0.94]
+     - Energy similarity (+0.94)
+'''
 ---
 
 ## Experiments You Tried
