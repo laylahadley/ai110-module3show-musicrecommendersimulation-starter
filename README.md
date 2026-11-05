@@ -98,19 +98,30 @@ You can add more tests in `tests/test_recommender.py`.
 ---
 
 ## Sample Recommendation Output
+'''
+Loaded songs: 18
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+Top recommendations for pop/happy listener:
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
+1. Sunrise City — Neon Echo  [score: 3.98]
+     - Genre match: pop (+2.0)
+     - Mood match: happy (+1.0)
+     - Energy similarity (+0.98)
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+2. Gym Hero — Max Pulse  [score: 2.87]
+     - Genre match: pop (+2.0)
+     - Energy similarity (+0.87)
+
+3. Rooftop Lights — Indigo Parade  [score: 1.96]
+     - Mood match: happy (+1.0)
+     - Energy similarity (+0.96)
+
+4. Neon Mirage — Crystal Circuit  [score: 0.99]
+     - Energy similarity (+0.99)
+
+5. Night Drive Loop — Neon Echo  [score: 0.95]
+     - Energy similarity (+0.95)
+'''
 
 ---
 
@@ -148,30 +159,3 @@ Write 1 to 2 paragraphs here about what you learned:
 
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
-
-
-### Sample Recommendation Output
-'''
-Loaded songs: 18
-
-Top recommendations for pop/happy listener:
-
-1. Sunrise City — Neon Echo  [score: 3.98]
-     - Genre match: pop (+2.0)
-     - Mood match: happy (+1.0)
-     - Energy similarity (+0.98)
-
-2. Gym Hero — Max Pulse  [score: 2.87]
-     - Genre match: pop (+2.0)
-     - Energy similarity (+0.87)
-
-3. Rooftop Lights — Indigo Parade  [score: 1.96]
-     - Mood match: happy (+1.0)
-     - Energy similarity (+0.96)
-
-4. Neon Mirage — Crystal Circuit  [score: 0.99]
-     - Energy similarity (+0.99)
-
-5. Night Drive Loop — Neon Echo  [score: 0.95]
-     - Energy similarity (+0.95)
-'''
