@@ -17,7 +17,8 @@ represented by a single fixed set of preferences and that a song's genre, mood, 
 are enough to judge fit. It is meant to demonstrate how a recommender turns data into
 ranked predictions, not to power an actual production app.
 
-
+Classroom Exploration:
+    - It should not be used to make real recommendations for actual listeners, to judge the quality of any artist or song, or in any setting where a biased or missed recommendation would matter. It is a learning demo, not a production system.
 ---
 
 ## 3. How the Model Works  
@@ -119,9 +120,20 @@ profiles that can change over time would make the recommendations more realistic
 
 ## 9. Personal Reflection  
 
-Building this made it clear that a recommender is really just scoring and ranking, i.e. the process of turning preferences and song attributes into numbers, then sorting them. The biggest lesson was
-how much the *weights* shape the outcome: small changes to how I valued genre versus
-energy visibly changed who/what got recommended. I was surprised how easily a reasonable-looking
-rule created bias, like penalizing "indie pop" over a one-word label. It changed how I see
-real-world apps and that their recommendations aren't neutral facts, they're the product of design
-choices someone made about what counts as a 'good match'.
+My biggest learning moment was realizing a recommender is really just scoring and
+ranking, which is to turn preferences and song attributes into numbers, then sort them. Once
+that clicked, the whole system stopped feeling like magic.
+
+AI tools sped up the boilerplate, i.e. loading the CSV, formatting terminal output, and were
+useful for explaining concepts like .sort() vs sorted(). But I had to double-check them
+routinely: the AI left a duplicate load_songs function in my file that silently returned
+an empty list, and I had to trace why "Loaded songs: 0" was happening myself. That taught
+me AI is good for drafting but can't be trusted blindly, I needed to stay in control of the logic.
+
+What surprised me most is how a handful of simple if-statements and one subtraction can
+produce rankings that genuinely "feel" like real recommendations. There's no machine
+learning here, yet the output still looks personalized.
+
+If I extended this, I would add a diversity rule so the Top 5 isn't dominated by one genre,
+use fuzzy matching so "indie pop" counts toward "pop," and bring in the valence and
+danceability columns I already have to capture "vibe" more fully.
