@@ -17,17 +17,21 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+Real platforms like Spotify and YouTube Music combine two approaches. Collaborative filtering recommends songs based on what similar users liked, using behavior signals like likes, skips, replays, and playlist additions. Content-based filtering recommends songs whose attributes (genre, mood, energy, tempo) resemble what a user already enjoys. At scale, these systems blend both and learn from millions of interactions.
 
-Some prompts to answer:
+My simulation is a content-based recommender. It compares each song's attributes to a user's "taste profile" and gives the song a score. A genre match is worth the most points, a mood match is worth fewer, and energy is scored by how *close* the song is to the user's target energy, not by how high or low it is. After every song is scored, a ranking rule sorts them from highest to lowest and returns the top recommendations. My version prioritizes genre and mood first, then fine-tunes with energy so the "vibe" feels right.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+**Song features used:** title, artist, genre, mood, energy, tempo_bpm, valence
 
-You can include a simple diagram or bullet list if helpful.
+**UserProfile features used:** favorite_genre, favorite_mood, target_energy
+
+**Algorithm Recipe:**
+- +2.0 points if the song's genre matches the user's favorite genre
+- +1.0 point if the song's mood matches the user's favorite mood
+- + up to 1.5 points for energy closeness: 1.5 × (1 − |song.energy − target_energy|)
+- Rank all songs by total score, highest first, and return the top K
+
+
 
 ---
 
