@@ -97,3 +97,50 @@ Now apply a Ranking Rule with two policies—(1) no consecutive tracks by the sa
 - Track C (88, Artist Y) — takes #4.
 
 The Scoring Rule did the heavy lifting of finding the best candidates; the Ranking Rule turned those candidates into a better listening experience.
+
+## Phase 2 – Dataset Expansion Prompt
+"Here is my songs.csv with headers id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness. Generate 10 additional songs in valid CSV format using the same headers, continuing ids from 11. Use genres and moods NOT already in the file (current genres: pop, lofi, rock, ambient, jazz, synthwave, indie pop; current moods: happy, chill, intense, relaxed, moody, focused). Keep energy, valence, danceability, and acousticness between 0.0 and 1.0 and make the values realistic for each genre. Do not use commas inside titles or artist names."
+(Copilot Chat errored, so I sent this prompt to Claude.)
+
+## Phase 2 – User Profile
+```python
+user_prefs = {
+    "favorite_genre": "lofi",
+    "favorite_mood": "chill",
+    "target_energy": 0.40,
+}
+```
+
+### Critique prompt
+"Here is my user profile: favorite_genre = lofi, favorite_mood = chill, target_energy = 0.40. Will these preferences let my recommender tell the difference between 'intense rock' and 'chill lofi'? Or is the profile too narrow?"
+
+### AI critique (Claude)
+- Yes, it can tell intense rock from chill lofi. Storm Runner (rock, intense, energy 0.91) misses on genre, misses on mood, and is 0.51 away on energy, so it scores very low. Midnight Coding (lofi, chill, 0.42) matches on all three.
+- Energy is the key difference. Without target_energy, any non-lofi, non-chill song would score 0, and the system couldn't rank them at all.
+- Too narrow in some ways:
+  - Only ONE favorite genre. Real people like several, and a lofi fan who also likes jazz gets no credit for jazz.
+  - Exact matching: "relaxed" and "focused" feel close to "chill" but earn 0 mood points.
+  - No valence, so it can't tell an upbeat intense song (Gym Hero) from a dark intense song (Storm Runner).
+- Possible upgrades: a list of favorite genres, a target_valence, or a likes_acoustic flag.
+
+### My take
+I agree with Claude's critique. Chill lofi and intense rock are essentially opposite genres and moods, so the profile scope is wide enough to distinguish the two. 
+
+## Phase 2 – Scoring Logic Design (new chat session)
+
+### Prompt
+"Using my songs.csv, suggest point-weighting strategies for a content-based recommender that scores genre match, mood match, and energy closeness. How much should a mood match count compared to a genre match? I want a balance where neither feature completely dominates."
+
+### AI answer (Claude)
+- Genre should weigh the most, because it describes the overall sound (a metal fan rarely wants classical). Mood is the next most important, since it describes the moment (studying vs. working out).
+- With +2.0 for genre and +1.0 for mood, a genre match is worth twice a mood match, but genre does not dominate everything once energy is added.
+- Energy closeness formula: energy_points = 1.5 × (1 − |song_energy − target_energy|).
+  This gives up to 1.5 points, rewards closeness rather than "higher is better," and stays between 0 and 1.5 because energy runs 0–1.
+- Balance check: a song matching only on genre with poor energy (2 + 1.5×0.4 = 2.6) narrowly beats a song matching mood with perfect energy (1 + 1.5 = 2.5). That's close, so energy and mood together can compete with genre alone.
+- Alternative strategies: equal weights (1/1/1, so mood matters as much as genre), or energy-heavy (energy ×3) for "vibe-first" listeners.
+
+### Final recipe
+- +2.0 for a genre match
+- +1.0 for a mood match
+- +0 to 1.5 for energy closeness: 1.5 × (1 − |song.energy − target_energy|)
+- Max possible score: 4.5

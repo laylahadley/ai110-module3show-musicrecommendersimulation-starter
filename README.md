@@ -21,17 +21,56 @@ Real platforms like Spotify and YouTube Music combine two approaches. Collaborat
 
 My simulation is a content-based recommender. It compares each song's attributes to a user's "taste profile" and gives the song a score. A genre match is worth the most points, a mood match is worth fewer, and energy is scored by how *close* the song is to the user's target energy, not by how high or low it is. After every song is scored, a ranking rule sorts them from highest to lowest and returns the top recommendations. My version prioritizes genre and mood first, then fine-tunes with energy so the "vibe" feels right.
 
-**Song features used:** title, artist, genre, mood, energy, tempo_bpm, valence
+### Dataset
+`data/songs.csv` contains 20 songs. The original 10 were expanded with 10 AI-generated songs covering new genres (hip hop, country, classical, r&b, metal, reggae, edm, folk, latin, blues) and new moods.
 
+**Song features used:** title, artist, genre, mood, energy (0.0–1.0)
+Also available for future upgrades: tempo_bpm, valence, danceability, acousticness
+
+### User Profile
+```python
+user_prefs = {
+    "favorite_genre": "lofi",
+    "favorite_mood": "chill",
+    "target_energy": 0.40,
+}
+```
 **UserProfile features used:** favorite_genre, favorite_mood, target_energy
 
-**Algorithm Recipe:**
-- +2.0 points if the song's genre matches the user's favorite genre
-- +1.0 point if the song's mood matches the user's favorite mood
-- + up to 1.5 points for energy closeness: 1.5 × (1 − |song.energy − target_energy|)
-- Rank all songs by total score, highest first, and return the top K
+### Algorithm Recipe (Scoring Rule)
+For each song:
+- **+2.0 points** if `song.genre == favorite_genre`
+- **+1.0 point** if `song.mood == favorite_mood`
+- **+0 to 1.5 points** for energy closeness: `1.5 × (1 − |song.energy − target_energy|)`
+
+Maximum score: 4.5. Genre is weighted highest because it describes the overall sound, mood second because it describes the moment, and energy fine-tunes the vibe by rewarding songs *closest* to the target, not just higher or lower.
+
+### Ranking Rule
+Score every song, sort from highest to lowest score, and return the top K (default K = 5).
+
+**Example (lofi / chill / 0.40 profile):**
+| Song | Genre | Mood | Energy pts | Total |
+|---|---|---|---|---|
+| Midnight Coding | +2.0 | +1.0 | 1.47 | 4.47 |
+| Library Rain | +2.0 | +1.0 | 1.43 | 4.43 |
+| Focus Flow | +2.0 | 0 | 1.50 | 3.50 |
+| Spacewalk Thoughts | 0 | +1.0 | 1.32 | 2.32 |
+| Storm Runner | 0 | 0 | 0.74 | 0.74 |
+
+### Data Flow
+INPUT: user_prefs + songs.csv
+↓
+PROCESS: loop over every song → apply Scoring Rule → (song, score)
+↓
+OUTPUT: Ranking Rule sorts by score → Top K recommendations
 
 
+### Expected Biases
+- **Genre over-prioritization:** with genre worth +2.0, a song in the right genre but the wrong mood can outrank a song that perfectly matches the user's mood and energy in a different genre.
+- **Exact string matching:** "indie pop" gets no credit for "pop," and "relaxed" or "focused" get no credit for "chill," even though they feel similar.
+- **Uneven catalog:** lofi has 3 songs while most genres have only 1, so lofi fans get more good matches than metal or blues fans.
+- **Filter bubble:** the system only recommends more of what the user already likes and never suggests something new.
+- **AI-generated data:** the 10 added songs reflect the AI's assumptions about genres (e.g., metal = angry and high energy, classical = peaceful), which may reinforce stereotypes.
 
 ---
 
