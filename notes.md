@@ -144,3 +144,30 @@ I agree with Claude's critique. Chill lofi and intense rock are essentially oppo
 - +1.0 for a mood match
 - +0 to 1.5 for energy closeness: 1.5 × (1 − |song.energy − target_energy|)
 - Max possible score: 4.5
+
+## Phase 3 – Implementation Prompts (Copilot Chat kept timing out, so I used Claude)
+
+### Prompt 1 – load_songs
+"Implement load_songs(csv_path) in src/recommender.py. Use Python's csv module to read data/songs.csv and return a list of dictionaries, one per song. Convert id and tempo_bpm to int, and energy, valence, danceability, and acousticness to float so I can do math with them later."
+
+### Prompt 2 – score_song
+"Implement score_song(user_prefs, song) using my Algorithm Recipe: +2.0 points for a genre match, +1.0 point for a mood match, and energy closeness points = 1.5 × (1 − |song energy − target_energy|). Return BOTH the numeric score and a list of reasons, such as 'genre match: pop (+2.0)', so users understand why a song was recommended."
+
+### Prompt 3 – recommend_songs
+"What's the most Pythonic way to loop through all songs, score each one with score_song, and return the top k sorted from highest to lowest score? Also explain the difference between .sort() and sorted()."
+
+AI answer on .sort() vs sorted():
+- `list.sort()` sorts the list IN PLACE (it changes the original list) and returns None. It only works on lists.
+- `sorted(iterable)` returns a NEW sorted list and leaves the original unchanged. It works on any iterable.
+- I used `sorted()` so the original song catalog stays in its CSV order and isn't modified by the recommender. That's safer if the same list is reused (for example, to score a second user profile).
+- `key=lambda item: item[1]` tells it to sort by the score, and `reverse=True` puts the highest scores first. Slicing with `[:k]` keeps the top k.
+
+### Prompt 4 – CLI output
+"Format the output in src/main.py as a clean, readable terminal layout that shows each song's rank, title, artist, final score, and the reasons from score_song."
+
+### Prompt 5 – docstrings
+"Add 1-line docstrings to every function in recommender.py."
+
+### Prompt 6 – commit message
+"Generate a commit message summarizing my implementation. Mention that it's a working CLI-first simulation."
+
