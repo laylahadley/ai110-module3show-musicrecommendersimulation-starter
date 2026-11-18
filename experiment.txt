@@ -1,0 +1,119 @@
+Loaded songs: 20
+
+============================================================
+Profile: High-Energy Pop
+Prefs: genre=pop, mood=happy, energy=0.80
+============================================================
+1. Sunrise City by Neon Echo
+   Score: 4.94 / 5.00
+   - genre match: pop (+1.0)
+   - mood match: happy (+1.0)
+   - energy 0.82 vs target 0.80 (+2.94)
+2. Rooftop Lights by Indigo Parade
+   Score: 3.88 / 5.00
+   - mood match: happy (+1.0)
+   - energy 0.76 vs target 0.80 (+2.88)
+3. Gym Hero by Max Pulse
+   Score: 3.61 / 5.00
+   - genre match: pop (+1.0)
+   - energy 0.93 vs target 0.80 (+2.61)
+4. Fuego Lento by Sol Mestizo
+   Score: 3.00 / 5.00
+   - energy 0.80 vs target 0.80 (+3.00)
+5. Concrete Crown by Block Theory
+   Score: 2.94 / 5.00
+   - energy 0.78 vs target 0.80 (+2.94)
+
+============================================================
+Profile: Chill Lofi
+Prefs: genre=lofi, mood=chill, energy=0.40
+============================================================
+1. Midnight Coding by LoRoom
+   Score: 4.94 / 5.00
+   - genre match: lofi (+1.0)
+   - mood match: chill (+1.0)
+   - energy 0.42 vs target 0.40 (+2.94)
+2. Library Rain by Paper Lanterns
+   Score: 4.85 / 5.00
+   - genre match: lofi (+1.0)
+   - mood match: chill (+1.0)
+   - energy 0.35 vs target 0.40 (+2.85)
+3. Focus Flow by LoRoom
+   Score: 4.00 / 5.00
+   - genre match: lofi (+1.0)
+   - energy 0.40 vs target 0.40 (+3.00)
+4. Spacewalk Thoughts by Orbit Bloom
+   Score: 3.64 / 5.00
+   - mood match: chill (+1.0)
+   - energy 0.28 vs target 0.40 (+2.64)
+5. Rainy Crossroads by Muddy Lantern
+   Score: 2.94 / 5.00
+   - energy 0.38 vs target 0.40 (+2.94)
+
+============================================================
+Profile: Deep Intense Rock
+Prefs: genre=rock, mood=intense, energy=0.90
+============================================================
+1. Storm Runner by Voltline
+   Score: 4.97 / 5.00
+   - genre match: rock (+1.0)
+   - mood match: intense (+1.0)
+   - energy 0.91 vs target 0.90 (+2.97)
+2. Gym Hero by Max Pulse
+   Score: 3.91 / 5.00
+   - mood match: intense (+1.0)
+   - energy 0.93 vs target 0.90 (+2.91)
+3. Neon Pulse by Voltage Kids
+   Score: 2.85 / 5.00
+   - energy 0.95 vs target 0.90 (+2.85)
+4. Iron Tempest by Grave Signal
+   Score: 2.79 / 5.00
+   - energy 0.97 vs target 0.90 (+2.79)
+5. Sunrise City by Neon Echo
+   Score: 2.76 / 5.00
+   - energy 0.82 vs target 0.90 (+2.76)
+
+============================================================
+Profile: Adversarial - Sad but High Energy
+Prefs: genre=blues, mood=sad, energy=0.90
+============================================================
+1. Rainy Crossroads by Muddy Lantern
+   Score: 3.44 / 5.00
+   - genre match: blues (+1.0)
+   - mood match: sad (+1.0)
+   - energy 0.38 vs target 0.90 (+1.44)
+2. Storm Runner by Voltline
+   Score: 2.97 / 5.00
+   - energy 0.91 vs target 0.90 (+2.97)
+3. Gym Hero by Max Pulse
+   Score: 2.91 / 5.00
+   - energy 0.93 vs target 0.90 (+2.91)
+4. Neon Pulse by Voltage Kids
+   Score: 2.85 / 5.00
+   - energy 0.95 vs target 0.90 (+2.85)
+5. Iron Tempest by Grave Signal
+   Score: 2.79 / 5.00
+   - energy 0.97 vs target 0.90 (+2.79)
+
+============================================================
+Profile: Edge Case - Genre Not in Catalog
+Prefs: genre=k-pop, mood=happy, energy=0.70
+============================================================
+1. Rooftop Lights by Indigo Parade
+   Score: 3.82 / 5.00
+   - mood match: happy (+1.0)
+   - energy 0.76 vs target 0.70 (+2.82)
+2. Sunrise City by Neon Echo
+   Score: 3.64 / 5.00
+   - mood match: happy (+1.0)
+   - energy 0.82 vs target 0.70 (+2.64)
+3. Night Drive Loop by Neon Echo
+   Score: 2.85 / 5.00
+   - energy 0.75 vs target 0.70 (+2.85)
+4. Concrete Crown by Block Theory
+   Score: 2.76 / 5.00
+   - energy 0.78 vs target 0.70 (+2.76)
+5. Island Sunday by Coral Drift
+   Score: 2.70 / 5.00
+   - energy 0.60 vs target 0.70 (+2.70)
+

@@ -171,3 +171,39 @@ AI answer on .sort() vs sorted():
 ### Prompt 6 – commit message
 "Generate a commit message summarizing my implementation. Mention that it's a working CLI-first simulation."
 
+## Phase 4 – System Evaluation (new chat session; used Claude since Copilot Chat errored)
+
+### Prompt 1 – Edge cases
+"Here are my recommender.py and songs.csv. Suggest 'adversarial' or 'edge case' user profiles designed to trick my scoring logic or produce unexpected results."
+
+AI answer:
+- Conflicting preferences: genre blues, mood sad, target_energy 0.90. The only blues/sad song is slow (0.38 energy), so it tests whether genre+mood labels override the user's energy target.
+- Genre not in the catalog: genre "k-pop". No song can earn genre points, so it tests what the system does when its strongest signal is missing.
+- Extreme energy (0.0 or 1.0): tests whether the energy formula still separates songs at the edges.
+- Capitalization ("POP" vs "pop"): my code lowercases both sides, so this is handled.
+
+### Prompt 2 – Why did a song rank first?
+"Using the weights in recommender.py, explain why Sunrise City ranked first for the pop/happy/0.80 profile, and why Gym Hero ranked second even though the user wanted happy songs."
+
+AI answer:
+- Sunrise City is the only song that matches all three preferences: genre pop (+2.0), mood happy (+1.0), and energy 0.82, only 0.02 from 0.80 (+1.47). Total 4.47 of a possible 4.50.
+- Gym Hero is pop (+2.0) and very energetic (0.93, giving +1.30), but its mood is "intense," so it gets 0 mood points. About 3.30 total.
+- Rooftop Lights IS happy, but its genre is "indie pop," which doesn't exactly equal "pop," so it loses the 2.0 genre points and lands 3rd at 2.44. The genre weight is strong enough that a wrong-mood pop song beats a right-mood "indie pop" song.
+
+### Prompt 3 – Experiment
+"Apply a weight shift in recommender.py: double the importance of energy (ENERGY_MAX_POINTS 1.5 -> 3.0) and halve genre (GENRE_POINTS 2.0 -> 1.0). Verify the math remains valid."
+
+AI answer:
+- Energy points = 3.0 × (1 − |gap|). Since energy and target are both 0–1, the gap is 0–1, so energy points stay between 0 and 3.0. Never negative.
+- New max score = 1.0 + 1.0 + 3.0 = 5.0. main.py computes the max from the constants, so the printed "/ max" updates automatically.
+- Only the constants change. No logic changes are needed, so the math stays valid.
+
+### Prompt 4 – Bias / filter bubbles
+"Using recommender.py and songs.csv, identify potential filter bubbles or biases in my scoring logic. Does my system ignore certain types of users because of how I calculate the energy gap?"
+
+AI answer:
+- Genre dominance: +2.0 for genre beats mood (+1.0), so users mostly see their one favorite genre. That's a filter bubble.
+- Uneven catalog: lofi has 3 songs, pop 2, and the other 15 genres have 1 each. A lofi fan gets 3 strong matches. A classical or blues fan gets 1, then unrelated filler chosen only by energy.
+- Energy gap bias: the gap formula is linear. A mid-energy user (target 0.5) can never be more than 0.5 away from any song, so every song earns at least 0.75 energy points, and energy barely separates songs for them. An extreme user (target 0.95) sees gaps up to 0.75, so energy matters much more. Users in the middle get weaker personalization from energy.
+- Exact string matching: "indie pop" ≠ "pop", and "relaxed"/"focused" ≠ "chill". Similar vibes get zero credit.
+- Rare moods: 16 moods across 20 songs means most moods have just one song, so mood matches are rare and genre ends up deciding most rankings.
